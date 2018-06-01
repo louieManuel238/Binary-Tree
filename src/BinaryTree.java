@@ -153,11 +153,29 @@ public class BinaryTree{
 	 * Depth-first search (Itterative)
 	 *
 	 *
-	 *
-	 *
+	 * @param value Value to be search
+	 * @return null if not found
+	 * @return int value searched
 	 **/
-	public int depthFirstSearch(int value){
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+	public Integer depthFirstSearch(int value){
+		if(root == null){
+			return null;
+		}
+		java.util.Stack<Node> frontier = new java.util.Stack<>();
+		frontier.push(root);
+
+		Node node = null;
+		while(frontier.size() != 0){
+			node = frontier.pop();
+			if(node.value == value)
+				return value;
+			if(node.right != null)
+				frontier.push(node.right);
+			if(node.left != null)
+				frontier.push(node.left);
+			
+		}
+		return null;
 	}
 
 	/**
@@ -167,8 +185,23 @@ public class BinaryTree{
 	 *
 	 *
 	 **/
-	public int breadthFirstSearch(int value){
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+	public Integer breadthFirstSearch(int value){
+		if(root == null)
+			return null;
+		java.util.Queue<Node> frontier = new java.util.LinkedList<>();
+		frontier.add(root);
+
+		Node node = null;
+		while(frontier.size() != 0){
+			node = frontier.remove();
+			if(node.value == value)
+				return value;
+			if(node.left != null)
+				frontier.add(node.left);
+			if(node.right != null)
+				frontier.add(node.right);
+		}
+		return null;
 	}
 
 	
@@ -188,8 +221,7 @@ public class BinaryTree{
 		bt.postOrderTraversal(bt.root);
 		System.out.println("");
 
-		bt.delete(6);
-		bt.inOrderTraversal(bt.root);
 		System.out.println("");
+		System.out.println(bt.breadthFirstSearch(3));
 	}
 }

@@ -1,9 +1,25 @@
-<project>
+<project name="BinaryTree" basedir="." default="main">
+
+	<property name="src.dir" value="src"/>
+	<property name="build.dir" value="build"/>
+	<property name="classes.dir" value="${build.dir}/classes"/>
+
+	<property name="main-class" value="BinaryTree"/>
+
 	<target name="clean">
-		<delete dir="build"/>
+		<delete dir="${build.dir}"/>
 	</target>
 
 	<target name="compile">
-		<javac srcdir="" destdir=""/>
+		<mkdir dir="${classes.dir}"/>
+		<javac srcdir="${src.dir}" destdir="${classes.dir}"/>
 	</target>
+
+	<target name="run">
+		<java classname="BinaryTree" classpath="${classes.dir}"/>
+	</target>
+
+	<target name="clean-build" depends="clean, compile"/>
+	<target name="run-all" depends="clean, compile, run"/>
+
 </project>
